@@ -16,6 +16,7 @@
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
     "pg": "^6.1.0",
+    "poloniex-api-node": "^1.1.1",
     "react-icons": "^2.2.5"
   }
 }
