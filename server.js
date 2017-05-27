@@ -39,22 +39,25 @@ const authCheck = jwt({
 let poloniex = new Poloniex(process.env.NODE_ENV_POLONIEX_KEY, process.env.NODE_ENV_POLONIEX_SECRET, { socketTimeout: 15000 });
 
 app.get('/api/ticker', (req,res) => {
+    console.log("Ticker request");
     poloniex.returnTicker(function(err, data) {
         res.json(data);
     });
 })
 
 app.get('/api/currencies', (req,res) => {
+    console.log("Currencies request");
     poloniex.returnCurrencies(function (err, data) {
         res.json(data);
     });
 })
 
 app.get('/api/trades/:pair', authCheck, (req,res) => {
-
+    console.log("Trades request");
 })
 
 app.get('/api/chart/:pair/:period/:start/:end', authCheck, (req,res) => {
+    console.log("Chart request");
     poloniex.returnChartData(req.params.pair, req.params.period, req.params.start, req.query.end, function (err, data) {
         res.json(data);
     });
