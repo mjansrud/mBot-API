@@ -43,29 +43,33 @@ app.get('/api/ticker', (req,res) => {
     poloniex.returnTicker(function(err, data) {
         res.json(data);
     });
-})
+
+});
 
 app.get('/api/currencies', (req,res) => {
     console.log("Currencies request");
     poloniex.returnCurrencies(function (err, data) {
         res.json(data);
     });
-})
+});
 
-app.get('/api/trades/:pair', authCheck, (req,res) => {
-    console.log("Trades request");
-})
+app.get('/api/trades/:pair/:start/:end', authCheck, (req,res) => {
+    console.log("Trades request: " + req.params.pair);
+    poloniex.returnMyTradeHistory(req.params.pair, req.params.start, req.query.end, function (err, data) {
+        res.json(data);
+    });
+});
 
 app.get('/api/chart/:pair/:period/:start/:end', authCheck, (req,res) => {
-    console.log("Chart request");
+    console.log("Chart request: " + req.params.pair);
     poloniex.returnChartData(req.params.pair, req.params.period, req.params.start, req.query.end, function (err, data) {
         res.json(data);
     });
-})
+});
 
 app.get('/api/sessions', authCheck, (req,res) => {
 
-})
+});
 
 
 app.listen(3001);
