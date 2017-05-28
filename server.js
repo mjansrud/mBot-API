@@ -11,8 +11,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const pg = require('pg');
 const path = require('path');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
 const Poloniex = require('poloniex-api-node');
+const pool = require('./lib/db');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +28,23 @@ const authCheck = jwt({
     audience: process.env.NODE_ENV_AUTH_AUDIENCE,
     issuer: process.env.NODE_ENV_AUTH_ISSUER,
     algorithms: ['RS256']
+});
+
+/*
+
+    Database
+
+ */
+
+//to run a query we just pass it to the pool
+//after we're done nothing has to be taken care of
+//we don't have to return any client to the pool or close a connection
+pool.query('SELECT $1::int AS number', ['2'], function(err, res) {
+    if(err) {
+        return console.error('error running query', err);
+    }
+
+    console.log('number:', res.rows[0].number);
 });
 
 /*
@@ -53,9 +70,9 @@ connection.onopen = function (session) {
     function trollboxEvent (args,kwargs) {
         console.log(args);
     }
-    session.subscribe('BTC_XMR', marketEvent);
-    session.subscribe('ticker', tickerEvent);
-    session.subscribe('trollbox', trollboxEvent);
+    // session.subscribe('BTC_XMR', marketEvent);
+    // session.subscribe('ticker', tickerEvent);
+    // session.subscribe('trollbox', trollboxEvent);
 }
 
 connection.onclose = function () {

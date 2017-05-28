@@ -1,15 +1,44 @@
 /*
  Create database structure
+ Call this manually once
+
  */
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('mbot', 'jansrud', 'password', {
+    host: 'localhost',
+    dialect: 'postgres',
 
-//Connect
-const pg = require('pg');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/mbot';
-const client = new pg.Client(connectionString);
-client.connect();
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+    }
 
-//Databases
-const query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
+});
 
-//Exit connections
-query.on('end', () => { client.end(); });
+const User = sequelize.define('user', {
+    username: Sequelize.STRING,
+    birthday: Sequelize.DATE
+});
+
+// force: true will drop the table if it already exists
+User.sync({force: true}).then(() => {
+    // Table created
+    return User.create({
+        firstName: 'John',
+        lastName: 'Hancock'
+    });
+});
+
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
+
+User.findAll().then(users => {
+    console.log(users)
+})
