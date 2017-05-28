@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const pg = require('pg');
 const path = require('path');
 const Poloniex = require('poloniex-api-node');
-const pool = require('./lib/db');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,24 +31,15 @@ const authCheck = jwt({
 
 /*
 
-    Database
+ Database
 
  */
 
-//to run a query we just pass it to the pool
-//after we're done nothing has to be taken care of
-//we don't have to return any client to the pool or close a connection
-pool.query('SELECT $1::int AS number', ['2'], function(err, res) {
-    if(err) {
-        return console.error('error running query', err);
-    }
-
-    console.log('number:', res.rows[0].number);
-});
+const ticksController = require('./controllers').ticks;
 
 /*
 
-    Poloniex
+ Poloniex
 
  */
 
@@ -61,17 +51,28 @@ var connection = new autobahn.Connection({
 });
 
 connection.onopen = function (session) {
-    function marketEvent (args,kwargs) {
-        console.log(args);
+
+    /*
+     function marketEvent (data,kwargs) {
+        console.log(data);
+     }
+     */
+
+    function tickerEvent (data,kwargs) {
+
+        //console.log(data);
+        ticksController.create(data);
+
     }
-    function tickerEvent (args,kwargs) {
-        console.log(args);
-    }
-    function trollboxEvent (args,kwargs) {
-        console.log(args);
-    }
+
+    /*
+    Tick.findOne().then(tick => {
+        console.log(tick.get('last'));
+    });
+    */
+
     // session.subscribe('BTC_XMR', marketEvent);
-    // session.subscribe('ticker', tickerEvent);
+    session.subscribe('ticker', tickerEvent);
     // session.subscribe('trollbox', trollboxEvent);
 }
 
@@ -84,7 +85,7 @@ connection.open();
 
 /*
 
-    User API
+ User API
 
  */
 
