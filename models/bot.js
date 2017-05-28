@@ -1,25 +1,23 @@
-"use strict";
-
+'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var Bot = sequelize.define("Bot", {
-        pair: DataTypes.STRING,
-        paper: DataTypes.BOOLEAN,
-        period: DataTypes.STRING,
-        start_capital: DataTypes.STRING,
-        buy_rate: DataTypes.STRING,
-        sell_rate: DataTypes.STRING,
-        rsi_periods: DataTypes.STRING,
-        trend_ema: DataTypes.STRING,
-        max_buy_duration: DataTypes.STRING,
-        max_sell_duration: DataTypes.STRING,
-        balance: DataTypes.STRING
-    }, {
-        classMethods: {
-            associate: function(models) {
-                User.hasMany(models.Task)
-            }
-        }
-    });
-
-    return User;
+  var bot = sequelize.define('bot', {
+    pair: DataTypes.STRING,
+    paper: DataTypes.BOOLEAN,
+    period: DataTypes.INTEGER,
+    start_capital: DataTypes.FLOAT,
+    buy_rate: DataTypes.FLOAT,
+    sell_rate: DataTypes.FLOAT,
+    rsi_oeriods: DataTypes.INTEGER,
+    trend_ema: DataTypes.FLOAT,
+    max_buy_duration: DataTypes.INTEGER,
+    max_sell_duration: DataTypes.INTEGER,
+    balance: DataTypes.FLOAT
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
+  });
+  return bot;
 };
