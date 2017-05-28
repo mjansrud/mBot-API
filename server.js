@@ -36,6 +36,41 @@ const authCheck = jwt({
 
  */
 
+var autobahn = require('autobahn');
+var wsuri = "wss://api.poloniex.com";
+var connection = new autobahn.Connection({
+    url: wsuri,
+    realm: "realm1"
+});
+
+connection.onopen = function (session) {
+    function marketEvent (args,kwargs) {
+        console.log(args);
+    }
+    function tickerEvent (args,kwargs) {
+        console.log(args);
+    }
+    function trollboxEvent (args,kwargs) {
+        console.log(args);
+    }
+    session.subscribe('BTC_XMR', marketEvent);
+    session.subscribe('ticker', tickerEvent);
+    session.subscribe('trollbox', trollboxEvent);
+}
+
+connection.onclose = function () {
+    console.log("Websocket connection closed");
+}
+
+connection.open();
+
+
+/*
+
+    User API
+
+ */
+
 let poloniex = new Poloniex(process.env.NODE_ENV_POLONIEX_KEY, process.env.NODE_ENV_POLONIEX_SECRET, { socketTimeout: 15000 });
 
 app.get('/api/ticker', (req,res) => {
