@@ -39,6 +39,7 @@ config/config.json
 # Dependency directories
 node_modules/
 jspm_packages/
+migrations
 
 # Typescript v1 declaration files
 typings/
