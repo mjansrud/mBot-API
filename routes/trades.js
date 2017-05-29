@@ -35,7 +35,7 @@ const authCheck = jwt({
 
 module.exports = function(app){
 
-    app.get('/api/ticker', (req,res) => {
+    app.get('/ticker', (req,res) => {
         console.log("Ticker request");
         poloniex.returnTicker(function(err, data) {
             res.json(data);
@@ -43,28 +43,28 @@ module.exports = function(app){
 
     });
 
-    app.get('/api/currencies', (req,res) => {
+    app.get('/currencies', (req,res) => {
         console.log("Currencies request");
         poloniex.returnCurrencies(function (err, data) {
             res.json(data);
         });
     });
 
-    app.get('/api/trades/:pair/:start/:end' , (req,res) => {
+    app.get('/trades/:pair/:start/:end' , (req,res) => {
         console.log("Trades request: " + req.params.pair);
         poloniex.returnMyTradeHistory(req.params.pair, req.params.start, req.query.end, function (err, data) {
             res.json(data);
         });
     });
 
-    app.get('/api/chart/:pair/:period/:start/:end', (req,res) => {
+    app.get('/chart/:pair/:period/:start/:end', (req,res) => {
         console.log("Chart request: " + req.params.pair);
         poloniex.returnChartData(req.params.pair, req.params.period, req.params.start, req.query.end, function (err, data) {
             res.json(data);
         });
     });
 
-    app.get('/api/sessions', authCheck, (req,res) => {
+    app.get('/sessions', authCheck, (req,res) => {
 
     });
 
