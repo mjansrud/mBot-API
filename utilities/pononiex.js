@@ -6,7 +6,8 @@ const ticksController = require('../controllers').ticks;
 
 /*
 
- Poloniex
+ Poloniex ----
+ This module subscribes to the poloniex push api and inserts the rows into the database.
 
  */
 
@@ -21,7 +22,6 @@ module.exports = function(app){
 
     connection.onopen = function (session) {
 
-
         function tickerEvent (data,kwargs) {
 
             console.log(data);
@@ -29,13 +29,13 @@ module.exports = function(app){
 
         }
 
-        /*
+         /*
          Tick.findOne().then(tick => {
          console.log(tick.get('last'));
          });
          */
 
-        session.subscribe('ticker', tickerEvent);
+         //session.subscribe('ticker', tickerEvent);
     }
 
     connection.onclose = function () {

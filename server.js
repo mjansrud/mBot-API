@@ -3,15 +3,17 @@
 //Make environmental variables available
 require('dotenv').config();
 
-
-//Variables
+/*
+    Variables
+ */
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const pg = require('pg');
-const path = require('path');
 
+/*
+    Parser
+ */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -22,9 +24,10 @@ app.use(cors());
 
 require('./routes')(app);
 require('./utilities')(app);
+require('./bot/supervisor')(app);
 
 /*
-    Listen
+    Start server
  */
 
 app.listen(3001);
