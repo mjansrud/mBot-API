@@ -4,31 +4,28 @@
 require('dotenv').config();
 
 /*
-    Variables
+
+    mBot backend server
+    Written by Morten Jansrud
+
  */
+
+//variables
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-/*
-    Parser
- */
+//Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-/*
-   Modules
- */
-
+//Modules
 require('./routes')(app);
 require('./utilities')(app);
 require('./bot/supervisor')(app);
 
-/*
-    Start server
- */
-
+//Start server
 app.listen(3001);
 console.log('Welcome to mBot-API, listening on localhost:3001');

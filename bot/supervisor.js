@@ -13,11 +13,10 @@ var workerFarm = require('worker-farm')
 
 module.exports = function(app){
 
+    /*
     var checkSessions = setInterval(function()
     {
-        /*
-         Spawn workers
-         */
+        //Spawn workers
         for (var id = 0; id < 10; id++) {
             worker('#' + id + ' FOO', function (err, outp) {
                 console.log(outp)
@@ -26,6 +25,7 @@ module.exports = function(app){
         }
 
     }, 5000);
+    */
 
 
 };
