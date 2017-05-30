@@ -6,6 +6,7 @@
   "author": "Auth0",
   "license": "MIT",
   "dependencies": {
+    "autobahn": "^17.5.2",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "dotenv": "^4.0.0",
