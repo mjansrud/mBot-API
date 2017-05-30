@@ -7,11 +7,20 @@ var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 var db        = {};
 
-if (process.env.NODE_ENV == 'production') {
+if (env == 'production') {
   var sequelize = new Sequelize('ebdb', process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {host: process.env.RDS_HOSTNAME, port: process.env.RDS_PORT, dialect: 'postgres'});
 } else {
   var sequelize = new Sequelize(process.env.NODE_ENV_DATABASE_NAME, process.env.NODE_ENV_DATABASE_USERNAME, process.env.NODE_ENV_DATABASE_PASSWORD, {host: process.env.NODE_ENV_DATABASE_HOST, dialect: 'postgres'});
 }
+
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 fs
   .readdirSync(__dirname)
