@@ -1,10 +1,6 @@
 {
-  "name": "mBot-backend",
+  "name": "mBot",
   "version": "0.0.2",
-  "description": "",
-  "main": "server.js",
-  "author": "Auth0",
-  "license": "MIT",
   "dependencies": {
     "autobahn": "^17.5.2",
     "body-parser": "^1.17.2",
@@ -15,12 +11,12 @@
     "jwks-rsa": "^1.1.1",
     "pg": "^6.2.3",
     "poloniex-api-node": "^1.1.1",
-    "sequelize": "^3.30.4", 
+    "sequelize": "^3.30.4",
     "worker-farm": "^1.3.1"
   },
   "scripts": {
-    "start": "node server.js ",
-    "serve": "NODE_ENV=production node server.js ",
+    "start": "node bin/www",
+    "serve": "NODE_ENV=production node bin/www",
     "deploy": " eb deploy"
   }
 }

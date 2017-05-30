@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+//Make environmental variables available
+require('dotenv').config();
+
+//Include program
+var app = require('../main');
+
+/*
+
+    Start server
+
+ */
+var server = app.listen(process.env.NODE_ENV_SERVER_PORT, function() {
+    console.log('Welcome to mBot-API, listening on port ' + server.address().port);
+});

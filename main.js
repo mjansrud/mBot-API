@@ -1,8 +1,5 @@
 'use strict';
 
-//Make environmental variables available
-require('dotenv').config();
-
 /*
 
     mBot backend server
@@ -26,6 +23,4 @@ require('./routes')(app);
 require('./utilities')(app);
 require('./bot/supervisor')(app);
 
-//Start server
-app.listen(3001);
-console.log('Welcome to mBot-API, listening on localhost:3001');
+module.exports = app;
