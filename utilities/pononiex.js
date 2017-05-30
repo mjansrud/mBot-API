@@ -11,8 +11,6 @@ const ticksController = require('../controllers').ticks;
 
  */
 
-console.log("Starting autobahn");
-
 var autobahn = require('autobahn');
 var wsuri = "wss://api.poloniex.com";
 var connection = new autobahn.Connection({
@@ -37,7 +35,7 @@ module.exports = function(app){
          });
          */
 
-         session.subscribe('ticker', tickerEvent);
+         //session.subscribe('ticker', tickerEvent);
     }
 
     connection.onclose = function () {
