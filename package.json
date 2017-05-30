@@ -12,6 +12,7 @@
     "eb": "0.0.1",
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
+    "jwks-rsa": "^1.1.1",
     "pg": "^6.2.3",
     "poloniex-api-node": "^1.1.1",
     "react-icons": "^2.2.5",
