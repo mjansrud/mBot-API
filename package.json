@@ -1,12 +1,11 @@
 {
-  "name": "mBot-api",
-  "version": "0.0.1",
+  "name": "mBot-backend",
+  "version": "0.0.2",
   "description": "",
   "main": "server.js",
   "author": "Auth0",
   "license": "MIT",
   "dependencies": {
-    "autobahn": "^17.5.2",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "dotenv": "^4.0.0",
@@ -21,7 +20,8 @@
     "worker-farm": "^1.3.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development node server.js ",
-    "deploy": "NODE_ENV=production eb deploy"
+    "start": "node server.js ",
+    "run": "NODE_ENV=production node server.js ",
+    "deploy": " eb deploy"
   }
 }
