@@ -5,13 +5,12 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+if (process.env.NODE_ENV == 'production') {
+  var sequelize = new Sequelize('ebdb', process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {host: process.env.RDS_HOSTNAME, port: process.env.RDS_PORT, dialect: 'postgres'});
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  var sequelize = new Sequelize(process.env.NODE_ENV_DATABASE_NAME, process.env.NODE_ENV_DATABASE_USERNAME, process.env.NODE_ENV_DATABASE_PASSWORD, {host: process.env.NODE_ENV_DATABASE_HOST, dialect: 'postgres'});
 }
 
 fs
