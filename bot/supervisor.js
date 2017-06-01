@@ -13,7 +13,7 @@ var sqs = require('../utilities/sqs');
 var supervisor = module.exports = {};
 
 // main.js
-supervisor.supervisorSpawnBots = function() {
+supervisor.spawnBots = function() {
 
         sqs.awsConfigure();
         sqs.awsListQueues();

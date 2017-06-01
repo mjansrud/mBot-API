@@ -51,7 +51,6 @@ exports.awsRequestWorker = function(){
 
 };
 
-
 exports.awsReceiveRequest = function(){
 
     var params = {

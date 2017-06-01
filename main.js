@@ -29,7 +29,7 @@ function startApi(){
 
     //Start spawning bots
     var supervior = require('./bot/supervisor');
-    supervior.supervisorSpawnBots();
+    supervior.spawnBots();
 
     /*
 
