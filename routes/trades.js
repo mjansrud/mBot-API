@@ -50,6 +50,13 @@ module.exports = function(app){
         });
     });
 
+    app.get('/balances', (req,res) => {
+        console.log("Balances request");
+        poloniex.returnBalances(function (err, data) {
+            res.json(data);
+        });
+    });
+
     app.get('/trades/:pair/:start/:end' , (req,res) => {
         console.log("Trades request: " + req.params.pair);
         poloniex.returnMyTradeHistory(req.params.pair, req.params.start, req.query.end, function (err, data) {
