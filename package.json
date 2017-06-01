@@ -3,9 +3,12 @@
   "version": "0.0.2",
   "dependencies": {
     "autobahn": "^17.5.2",
+    "aws-sdk": "^2.60.0",
     "body-parser": "^1.17.2",
+    "bull": "^3.0.0-rc.2",
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
+    "es2015": "0.0.0",
     "express": "^4.15.3",
     "express-jwt": "^5.3.0",
     "jwks-rsa": "^1.1.1",
@@ -15,8 +18,11 @@
     "worker-farm": "^1.3.1"
   },
   "scripts": {
-    "start": "node bin/www",
-    "serve": "NODE_ENV=production node bin/www",
-    "deploy": " eb deploy"
+    "api": "node bin/www api",
+    "apiProduction": "NODE_ENV=production node bin/www api",
+    "apiDeploy": "eb deploy restapi",
+    "worker": "node bin/www worker",
+    "workerProduction": "NODE_ENV=production node bin/www worker",
+    "workerDeploy": "eb deploy worker"
   }
 }

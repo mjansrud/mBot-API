@@ -2,7 +2,7 @@
  * Created by jansrud on 29.05.2017.
  */
 
-const ticksController = require('../controllers').ticks;
+var ticksController = require('../controllers').ticks;
 
 /*
 
@@ -18,7 +18,7 @@ var connection = new autobahn.Connection({
     realm: "realm1"
 });
 
-module.exports = function(app){
+module.exports = function(){
 
     connection.onopen = function (session) {
 

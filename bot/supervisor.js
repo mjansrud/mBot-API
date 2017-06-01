@@ -2,31 +2,21 @@
  * Created by jansrud on 29.05.2017.
  */
 
-var workerFarm = require('worker-farm')
-    , worker    = workerFarm(require.resolve('./worker'))
-    , ret        = 0
+//Includes
+var sqs = require('../utilities/sqs');
 
 /*
  mBot core
- The supervisior for all the workers
+ The supervisior - spawns workers when needed
  */
 
-module.exports = function(app){
+var supervisor = module.exports = {};
 
-    /*
-    var checkSessions = setInterval(function()
-    {
-        //Spawn workers
-        for (var id = 0; id < 10; id++) {
-            worker('#' + id + ' FOO', function (err, outp) {
-                console.log(outp)
-                if (++ret == 10) workerFarm.end(worker)
-            });
-        }
+// main.js
+supervisor.supervisorSpawnBots = function() {
 
-    }, 5000);
-    */
+        sqs.awsConfigure();
+        sqs.awsListQueues();
+        sqs.awsRequestWorker();
 
-
-};
-
+    };
